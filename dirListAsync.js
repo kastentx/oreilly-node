@@ -5,6 +5,7 @@ var writeStream = fs.createWriteStream('./log.txt',
    'mode': 0666});
 
 writeStream.on('open', function() {
+  var counter = 0;
   // get list of files
   fs.readdir('./data/', function(err, files) {
     // for each file
@@ -28,8 +29,16 @@ writeStream.on('open', function() {
                 // log write
                 writeStream.write('changed ' + name + '\n', 
                   function(err) {
-                    if (err) console.error(err.message);
-                  });
+                    if (err) {
+                      console.error(err.message);
+                    } else {
+                      counter++;
+                      if (counter >= files.length) {
+                        writeStream.write('finished.\n');
+                        console.log('all done!');
+                      }
+                    }
+                });
               }
             });
           }

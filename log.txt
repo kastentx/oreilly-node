@@ -1,4 +1,0 @@
-changed data.txt
-changed data.txt
-changed data.txt
-changed data2.txt
